@@ -16,14 +16,20 @@ namespace chess
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
+        //Unit U1;
+        //Texture2D BT;
+        //Rectangle BR;
+        Board B1;
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            //Window SIZE AND properties
+            GHelper.graphics = new GraphicsDeviceManager(this);
+            GHelper.graphics.PreferredBackBufferHeight = 647;
+            GHelper.graphics.PreferredBackBufferWidth = 1152;
+            IsMouseVisible = true;
+            //initialize the static contentmanger
             Content.RootDirectory = "Content";
+            GHelper.content = Content;
         }
 
         /// <summary>
@@ -35,7 +41,8 @@ namespace chess
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            //U1 = new Unit("WBishop", new Vector2(7, 1), 5);
+            B1 = new Board();
             base.Initialize();
         }
 
@@ -45,8 +52,10 @@ namespace chess
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            // Create a static SpriteBatch, which can be used to draw textures.
+           GHelper.spritebatch = new SpriteBatch(GraphicsDevice);
+         //  BT = GHelper.content.Load<Texture2D>("InnerGame/Checkmate");
+          // BR = new Rectangle(0, 0, BT.Width, BT.Height);
 
             // TODO: use this.Content to load your game content here
         }
@@ -84,6 +93,11 @@ namespace chess
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            GHelper.spritebatch.Begin();
+        //    GHelper.spritebatch.Draw(BT, BR, Color.White);
+          //  U1.Draw();
+              B1.Draw();
+            GHelper.spritebatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
